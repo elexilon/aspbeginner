@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace WebApplication1
 {
@@ -20,12 +21,15 @@ namespace WebApplication1
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase("Temporal"));
+            services.AddLogging();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();

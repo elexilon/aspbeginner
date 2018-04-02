@@ -14,6 +14,9 @@ namespace WebApplication1.Pages
 
         public EditModel(AppDbContext db) { _db = db; }
 
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty]
         public Customer Customer { get; set; }
 
@@ -36,6 +39,7 @@ namespace WebApplication1.Pages
             try
             {
                 await _db.SaveChangesAsync();
+                Message = $"Customer {Customer.Name} updated!";
             }
             catch (DbUpdateConcurrencyException e)
             {

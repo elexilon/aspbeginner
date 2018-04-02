@@ -5,6 +5,10 @@
 }
 
 <form method="post">
+    @if (@Model.Message != null || @Model.Message == "")
+    {
+        <div class="alert alert-success" role="alert">@Model.Message</div>
+       }
     <table class="table">
         <thead>
             <tr>

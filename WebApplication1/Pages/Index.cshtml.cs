@@ -12,6 +12,9 @@ namespace WebApplication1.Pages
     {
         private readonly AppDbContext _db;
         public IndexModel(AppDbContext db) { _db = db; }
+
+        [TempData]
+        public string Message { get; set; }
         public IList<Customer> Customers { get; private set; }
         public async Task OnGetAsync()
         {
@@ -26,6 +29,7 @@ namespace WebApplication1.Pages
             {
                 _db.Customers.Remove(customer);
                 await _db.SaveChangesAsync();
+                Message = $"Customer {customer.Name} deleted!";
             }
 
             return RedirectToPage();
