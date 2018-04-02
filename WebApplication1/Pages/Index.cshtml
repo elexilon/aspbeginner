@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home page";
 }
 
-<form>
+<form method="post">
     <table class="table">
         <thead>
             <tr>
@@ -18,10 +18,13 @@
                 <tr>
                     <th>@customer.Id</th>
                     <th>@customer.Name</th>
-                    <th></th>
+                    <th>
+                        <a asp-page="./Edit" asp-route-id="@customer.Id">edit</a>
+                        <button type="submit" asp-page-handler="delete" asp-route-id="@customer.Id">delete</button>
+                    </th>
                 </tr>
             }
-
         </tbody>
     </table>
+    <a asp-page="./Create">create</a>
 </form>
